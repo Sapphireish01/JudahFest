@@ -41,6 +41,11 @@ export const metadata: Metadata = {
   title: "JUDAH FESTIVAL BERLIN 2026 | In the Name of Yahweh We Praise",
   description:
     "Official website for Judah Festival Berlin 2026. Saturday, October 3 • 4:00 PM - 9:30 PM at Church at the South Star, Berlin, BE.",
+  icons: {
+    icon: "/images/JUDAH-PNG.png",
+    shortcut: "/images/JUDAH-PNG.png",
+    apple: "/images/JUDAH-PNG.png",
+  },
   keywords: [
     "Judah Festival Berlin",
     "Gospel Festival 2026",
