@@ -79,14 +79,11 @@ export default function RootLayout({
     >
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400..700;1,400..700&family=Bebas+Neue&family=Monoton&family=Rock+Salt&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-          rel="stylesheet"
-        />
       </head>
-      <body className="antialiased min-h-screen flex flex-col bg-paper text-ink selection:bg-tertiary-gold selection:text-ink font-body">
+      <body
+        suppressHydrationWarning
+        className="antialiased min-h-screen flex flex-col bg-paper text-ink selection:bg-tertiary-gold selection:text-ink font-body"
+      >
         {children}
       </body>
     </html>

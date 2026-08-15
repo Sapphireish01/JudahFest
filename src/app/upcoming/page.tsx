@@ -7,13 +7,14 @@ import { Footer } from "@/components/Footer";
 import { TicketModal } from "@/components/TicketModal";
 import { Button } from "@/components/ui/Button";
 import { ARTISTS, Artist } from "@/data/lineup";
-import { Calendar, MapPin, Filter, Clock, Music, ChevronRight, X } from "lucide-react";
+import { Calendar, MapPin, Filter, Clock, Music, ChevronRight, X, Sparkles, Flame, Mic, Compass } from "lucide-react";
 
 export default function UpcomingPage() {
   const [isTicketsModalOpen, setIsTicketsModalOpen] = useState(false);
   const [selectedGenre, setSelectedGenre] = useState<string>("ALL");
   const [selectedDay, setSelectedDay] = useState<string>("Day 2 (Sat)");
   const [activeArtistModal, setActiveArtistModal] = useState<Artist | null>(null);
+  const [activeStage, setActiveStage] = useState<number | null>(null);
 
   const genres = ["ALL", "Worship", "Afrogospel", "Spoken Word"];
   const days = ["Day 1 (Fri)", "Day 2 (Sat)", "Day 3 (Sun)"];
@@ -152,8 +153,8 @@ export default function UpcomingPage() {
               </div>
             </div>
 
-            {/* Lineup Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Lineup Grid with Ample Spacing */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
               {filteredArtists.map((artist, idx) => (
                 <div
                   key={artist.id}
@@ -162,13 +163,13 @@ export default function UpcomingPage() {
                     idx % 2 === 0 ? "rotate-[-1.5deg]" : "rotate-[1.5deg]"
                   }`}
                 >
-                  <div className="relative h-56 w-full border-2 border-ink halftone overflow-hidden mb-3">
+                  <div className="relative h-64 w-full border-2 border-ink overflow-hidden mb-3">
                     <Image
                       src={artist.image}
                       alt={artist.name}
                       fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                      className="object-cover grayscale contrast-125 group-hover:grayscale-0 transition-all"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover object-top transition-all duration-300 group-hover:scale-105"
                     />
                     <span className="absolute top-2 left-2 bg-ink text-paper font-mono text-[10px] font-bold px-2 py-0.5 border border-paper">
                       {artist.genre}
@@ -192,52 +193,139 @@ export default function UpcomingPage() {
           </div>
         </section>
 
-        {/* SECTION 3: Interactive Festival Grounds Map */}
+        {/* SECTION 3: Interactive Festival Grounds Map with Micro-Interactions */}
         <section className="py-20 px-6 md:px-12 bg-paper border-b-4 border-ink">
           <div className="max-w-7xl mx-auto flex flex-col gap-10">
             <div className="text-center">
               <span className="font-annotation text-secondary text-xl rotate-[-1.5deg] block">
-                Festival Grounds Blueprint
+                Click a stage to inspect details
               </span>
-              <h2 className="font-headline text-5xl text-ink">PRAISE GROUNDS MAP</h2>
+              <h2 className="font-headline text-5xl text-ink flex items-center justify-center gap-2">
+                <Compass className="w-8 h-8 text-primary animate-spin [animation-duration:20s]" /> PRAISE GROUNDS MAP
+              </h2>
             </div>
 
-            {/* Custom Vector Map Container */}
-            <div className="bg-surface-high border-4 border-ink neo-shadow-lg p-8 relative min-h-[400px] flex flex-col items-center justify-center text-center">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-4xl my-6">
-                <div className="p-6 bg-paper border-2 border-ink neo-shadow rotate-[-2deg] flex flex-col items-center gap-2">
-                  <div className="w-12 h-12 bg-primary text-white font-headline text-2xl flex items-center justify-center border border-ink">
+            {/* Custom Interactive Vector Map Container */}
+            <div className="bg-surface-high border-4 border-ink neo-shadow-lg p-6 md:p-8 relative min-h-[420px] flex flex-col items-center justify-center text-center overflow-hidden">
+              {/* Background Map Blueprint Grid Pattern */}
+              <div className="absolute inset-0 bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:16px_16px] opacity-10 pointer-events-none" />
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl my-4 relative z-10">
+                {/* Stage 1: Main Yahweh Stage */}
+                <div
+                  onClick={() => setActiveStage(activeStage === 1 ? null : 1)}
+                  className={`p-6 bg-paper border-3 border-ink neo-shadow transition-all duration-300 cursor-pointer flex flex-col items-center gap-3 relative group ${
+                    activeStage === 1
+                      ? "ring-4 ring-primary scale-105 -rotate-0 z-20 bg-primary/5"
+                      : "rotate-[-2deg] hover:rotate-0 hover:scale-105"
+                  }`}
+                >
+                  <span className="absolute -top-3 right-4 font-mono text-[10px] font-bold px-2 py-0.5 bg-primary text-white border border-ink shadow-sm">
+                    MAIN ALTAR
+                  </span>
+                  <div className="w-14 h-14 bg-primary text-white font-headline text-3xl flex items-center justify-center border-2 border-ink neo-shadow-sm group-hover:rotate-12 transition-transform">
                     1
                   </div>
-                  <h3 className="font-headline text-2xl text-ink">MAIN YAHWEH STAGE</h3>
-                  <p className="font-body text-sm text-gray-700">
+                  <h3 className="font-headline text-2xl text-ink group-hover:text-primary transition-colors">
+                    MAIN YAHWEH STAGE
+                  </h3>
+                  <p className="font-body text-sm text-gray-700 leading-relaxed">
                     Main altar for headline ministers, mass choir, trumpets & midnight prayer.
                   </p>
+                  <span className="font-mono text-xs font-bold text-primary group-hover:underline mt-1 flex items-center gap-1">
+                    <Sparkles className="w-3.5 h-3.5" /> {activeStage === 1 ? "COLLAPSE" : "INSPECT STAGE →"}
+                  </span>
                 </div>
 
-                <div className="p-6 bg-paper border-2 border-ink neo-shadow rotate-[2deg] flex flex-col items-center gap-2">
-                  <div className="w-12 h-12 bg-secondary text-white font-headline text-2xl flex items-center justify-center border border-ink">
+                {/* Stage 2: AfroPraise Arena */}
+                <div
+                  onClick={() => setActiveStage(activeStage === 2 ? null : 2)}
+                  className={`p-6 bg-paper border-3 border-ink neo-shadow transition-all duration-300 cursor-pointer flex flex-col items-center gap-3 relative group ${
+                    activeStage === 2
+                      ? "ring-4 ring-secondary scale-105 -rotate-0 z-20 bg-secondary/5"
+                      : "rotate-[2deg] hover:rotate-0 hover:scale-105"
+                  }`}
+                >
+                  <span className="absolute -top-3 right-4 font-mono text-[10px] font-bold px-2 py-0.5 bg-secondary text-white border border-ink shadow-sm">
+                    AFROBEATS
+                  </span>
+                  <div className="w-14 h-14 bg-secondary text-white font-headline text-3xl flex items-center justify-center border-2 border-ink neo-shadow-sm group-hover:-rotate-12 transition-transform">
                     2
                   </div>
-                  <h3 className="font-headline text-2xl text-ink">AFROPRAISE ARENA</h3>
-                  <p className="font-body text-sm text-gray-700">
+                  <h3 className="font-headline text-2xl text-ink group-hover:text-secondary transition-colors">
+                    AFROPRAISE ARENA
+                  </h3>
+                  <p className="font-body text-sm text-gray-700 leading-relaxed">
                     Upbeat afrogospel beats, rap, hip-hop, and energetic dance fellowship.
                   </p>
+                  <span className="font-mono text-xs font-bold text-secondary group-hover:underline mt-1 flex items-center gap-1">
+                    <Flame className="w-3.5 h-3.5" /> {activeStage === 2 ? "COLLAPSE" : "INSPECT STAGE →"}
+                  </span>
                 </div>
 
-                <div className="p-6 bg-paper border-2 border-ink neo-shadow rotate-[-1deg] flex flex-col items-center gap-2">
-                  <div className="w-12 h-12 bg-tertiary-gold text-ink font-headline text-2xl flex items-center justify-center border border-ink">
+                {/* Stage 3: Youth & Poetry Tent */}
+                <div
+                  onClick={() => setActiveStage(activeStage === 3 ? null : 3)}
+                  className={`p-6 bg-paper border-3 border-ink neo-shadow transition-all duration-300 cursor-pointer flex flex-col items-center gap-3 relative group ${
+                    activeStage === 3
+                      ? "ring-4 ring-tertiary-gold scale-105 -rotate-0 z-20 bg-tertiary-gold/10"
+                      : "rotate-[-1deg] hover:rotate-0 hover:scale-105"
+                  }`}
+                >
+                  <span className="absolute -top-3 right-4 font-mono text-[10px] font-bold px-2 py-0.5 bg-tertiary-gold text-ink border border-ink shadow-sm">
+                    ACOUSTIC
+                  </span>
+                  <div className="w-14 h-14 bg-tertiary-gold text-ink font-headline text-3xl flex items-center justify-center border-2 border-ink neo-shadow-sm group-hover:rotate-12 transition-transform">
                     3
                   </div>
-                  <h3 className="font-headline text-2xl text-ink">YOUTH & POETRY TENT</h3>
-                  <p className="font-body text-sm text-gray-700">
+                  <h3 className="font-headline text-2xl text-ink group-hover:text-amber-700 transition-colors">
+                    YOUTH & POETRY TENT
+                  </h3>
+                  <p className="font-body text-sm text-gray-700 leading-relaxed">
                     Spoken word, acoustic worship, testimony circles & book readings.
                   </p>
+                  <span className="font-mono text-xs font-bold text-ink group-hover:underline mt-1 flex items-center gap-1">
+                    <Mic className="w-3.5 h-3.5" /> {activeStage === 3 ? "COLLAPSE" : "INSPECT STAGE →"}
+                  </span>
                 </div>
               </div>
 
-              <div className="p-4 bg-tertiary-gold/20 border-2 border-ink max-w-lg font-mono text-xs text-ink font-bold">
-                📍 LOCATION: CHURCH AT THE SOUTH STAR, BERLIN, BE • SAT, OCT 3 (4:00 PM - 9:30 PM)
+              {/* Stage Detail Drawer Micro-Interaction */}
+              {activeStage !== null && (
+                <div className="mt-4 w-full max-w-4xl p-5 bg-paper border-2 border-ink neo-shadow text-left animate-in slide-in-from-bottom-2 fade-in">
+                  {activeStage === 1 && (
+                    <div className="flex flex-col gap-2">
+                      <span className="font-mono text-xs font-bold text-primary">📍 STAGE 1 HIGHLIGHTS:</span>
+                      <h4 className="font-headline text-2xl text-ink">MAIN YAHWEH STAGE (OUTDOOR ALTAR)</h4>
+                      <p className="font-body text-base text-gray-700">
+                        Host to headline ministers Limoblaze, Minister Gabby McKeown, Prophet Martison, and Psalmist DMD. Features a 500-voice mass choir, trumpet processionals, and midnight intercession.
+                      </p>
+                    </div>
+                  )}
+                  {activeStage === 2 && (
+                    <div className="flex flex-col gap-2">
+                      <span className="font-mono text-xs font-bold text-secondary">📍 STAGE 2 HIGHLIGHTS:</span>
+                      <h4 className="font-headline text-2xl text-ink">AFROPRAISE ARENA (INDOOR AUDITORIUM)</h4>
+                      <p className="font-body text-base text-gray-700">
+                        Featuring DJ Shunz and live Afrogospel producers. Equipped with high-output sound systems, light shows, and open dance floor for youth praise.
+                      </p>
+                    </div>
+                  )}
+                  {activeStage === 3 && (
+                    <div className="flex flex-col gap-2">
+                      <span className="font-mono text-xs font-bold text-ink">📍 STAGE 3 HIGHLIGHTS:</span>
+                      <h4 className="font-headline text-2xl text-ink">YOUTH & POETRY TENT (ACOUSTIC PAVILION)</h4>
+                      <p className="font-body text-base text-gray-700">
+                        Intimate acoustic setup for spoken word poetry, testimony sessions, interactive Q&A panels, and Christian literature book signings.
+                      </p>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              <div className="mt-6 p-4 bg-tertiary-gold/20 border-2 border-ink max-w-lg font-mono text-xs text-ink font-bold flex items-center justify-center gap-2">
+                <MapPin className="w-4 h-4 text-primary shrink-0" />
+                <span>LOCATION: CHURCH AT THE SOUTH STAR, BERLIN, BE • SAT, OCT 3 (4:00 PM - 9:30 PM)</span>
               </div>
             </div>
           </div>

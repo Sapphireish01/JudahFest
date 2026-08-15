@@ -83,177 +83,72 @@ export default function HomePage() {
           {/* MAIN HERO CONTAINER */}
           <div className="max-w-7xl w-full mx-auto relative z-10 flex flex-col items-center justify-center min-h-[700px]">
 
-            {/* CIRCULAR FRAMING CARDS (Desktop Orbit Layout - 6 Surrounding Artist Cards) */}
+            {/* CIRCULAR FRAMING CARDS (Desktop 5-Point Layout: Top-Center, Sides & Corners) */}
+            {ARTISTS.map((artist, index) => {
+              const positions = [
+                // 1. Top-Left Arc
+                "top-[0rem] left-[1.5rem] xl:top-[-1rem] xl:left-[3.5rem] rotate-[-4deg]",
+                // 2. Top-Right Arc
+                "top-[0rem] right-[1.5rem] xl:top-[-1rem] xl:right-[3.5rem] rotate-[4deg]",
+                // 3. Mid-Left Side (Shifted down away from top cards)
+                "top-[60%] left-[-1rem] xl:left-[0.5rem] -translate-y-1/3 rotate-[-2deg]",
+                // 4. Mid-Right Side (Shifted down away from top cards)
+                "top-[60%] right-[-1rem] xl:right-[0.5rem] -translate-y-1/3 rotate-[2deg]",
+                // 5. Top-Center (Stand-alone card positioned at top center)
+                "top-[-3.5rem] left-1/2 -translate-x-1/2 rotate-[-1deg]"
+              ];
 
-            {/* 1. Top-Left Card: Nathaniel Bassey */}
-            <div
-              onClick={() => setSelectedArtist(ARTISTS[0])}
-              className="hidden lg:block absolute -top-4 left-0 xl:-top-[5rem] xl:left-[10rem]  w-56 xl:w-60 bg-paper p-2.5 border-2 border-ink neo-shadow rotate-[-6deg] transition-all duration-300 hover:rotate-0 hover:scale-105 hover:z-30 cursor-pointer group z-10"
-            >
-              <div className="relative h-40 w-full border border-ink halftone overflow-hidden">
-                <Image
-                  src={ARTISTS[0].image}
-                  alt={ARTISTS[0].name}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 300px"
-                  className="object-cover grayscale contrast-125 group-hover:grayscale-0 transition-all duration-300"
-                />
-                <div className="absolute bottom-2 left-2 bg-primary text-white font-headline text-[10px] px-2 py-0.5 border border-ink">
-                  HEADLINER
+              return (
+                <div
+                  key={artist.id}
+                  onClick={() => setSelectedArtist(artist)}
+                  className={`hidden lg:block absolute ${positions[index % positions.length]} w-56 xl:w-60 bg-paper p-2.5 border-2 border-ink neo-shadow-lg transition-all duration-300 hover:rotate-0 hover:scale-105 hover:z-30 cursor-pointer group z-10`}
+                >
+                  <div className="relative h-40 xl:h-44 w-full border-2 border-ink overflow-hidden">
+                    <Image
+                      src={artist.image}
+                      alt={artist.name}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 350px"
+                      className="object-cover object-top transition-all duration-300 group-hover:scale-105"
+                    />
+                    <div className="absolute bottom-2 left-2 bg-primary text-white font-headline text-[10px] px-2 py-0.5 border border-ink uppercase neo-shadow-sm">
+                      {artist.genre}
+                    </div>
+                  </div>
+                  <div className="mt-2 flex flex-col gap-0.5">
+                    <span className="font-mono text-[10px] text-secondary font-bold block">
+                      {artist.day} • {artist.time}
+                    </span>
+                    <h3 className="font-headline text-base text-ink leading-tight truncate">
+                      {artist.name}
+                    </h3>
+                  </div>
                 </div>
-              </div>
-              <div className="mt-2">
-                <span className="font-mono text-[10px] text-secondary font-bold block">
-                  {ARTISTS[0].day} • {ARTISTS[0].time}
-                </span>
-                <h3 className="font-headline text-lg text-ink leading-tight truncate">
-                  {ARTISTS[0].name}
-                </h3>
-              </div>
-              <div className="absolute -top-3 -left-3 washi-tape-gold rotate-[-10deg]" />
-            </div>
+              );
+            })}
 
-            {/* 2. Top-Right Card: Sinach */}
-            <div
-              onClick={() => setSelectedArtist(ARTISTS[1])}
-              className="hidden lg:block absolute -top-4 right-0 xl:right-[5rem] xl:top-[-3rem] w-56 xl:w-60 bg-paper p-2.5 border-2 border-ink neo-shadow rotate-[6deg] transition-all duration-300 hover:rotate-0 hover:scale-105 hover:z-30 cursor-pointer group z-10"
-            >
-              <div className="relative h-40 w-full border border-ink halftone overflow-hidden">
-                <Image
-                  src={ARTISTS[1].image}
-                  alt={ARTISTS[1].name}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 300px"
-                  className="object-cover grayscale contrast-125 group-hover:grayscale-0 transition-all duration-300"
-                />
-                <div className="absolute bottom-2 left-2 bg-tertiary-gold text-ink font-headline text-[10px] px-2 py-0.5 border border-ink">
-                  INTERNATIONAL
-                </div>
-              </div>
-              <div className="mt-2">
-                <span className="font-mono text-[10px] text-secondary font-bold block">
-                  {ARTISTS[1].day} • {ARTISTS[1].time}
-                </span>
-                <h3 className="font-headline text-lg text-ink leading-tight truncate">
-                  {ARTISTS[1].name}
-                </h3>
-              </div>
-              <div className="absolute -top-3 -right-3 washi-tape-ember rotate-[15deg]" />
-            </div>
-
-            {/* 3. Mid-Left Card: Limoblaze */}
-            <div
-              onClick={() => setSelectedArtist(ARTISTS[2])}
-              className="hidden lg:block absolute top-[40%] -left-6 xl:left-[1rem] xl:top-[21rem] -translate-y-1/2 w-52 xl:w-56 bg-paper p-2.5 border-2 border-ink neo-shadow rotate-[-4deg] transition-all duration-300 hover:rotate-0 hover:scale-105 hover:z-30 cursor-pointer group z-10"
-            >
-              <div className="relative h-32 w-full border border-ink halftone overflow-hidden">
-                <Image
-                  src={ARTISTS[2].image}
-                  alt={ARTISTS[2].name}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 300px"
-                  className="object-cover grayscale contrast-125 group-hover:grayscale-0 transition-all duration-300"
-                />
-              </div>
-              <div className="mt-1.5 flex items-center justify-between">
-                <h3 className="font-headline text-base text-ink truncate">{ARTISTS[2].name}</h3>
-                <span className="font-mono text-[9px] bg-secondary text-white px-1.5 py-0.5 border border-ink shrink-0">
-                  AFROGOSPEL
-                </span>
-              </div>
-              <div className="absolute -bottom-2 -left-2 washi-tape-gold rotate-[8deg]" />
-            </div>
-
-            {/* 4. Mid-Right Card: Victoria Orenze */}
-            <div
-              onClick={() => setSelectedArtist(ARTISTS[3])}
-              className="hidden lg:block absolute top-[40%] -right-6 xl:right-[6rem] xl:top-[22rem] -translate-y-1/2 w-52 xl:w-56 bg-paper p-2.5 border-2 border-ink neo-shadow rotate-[5deg] transition-all duration-300 hover:rotate-0 hover:scale-105 hover:z-30 cursor-pointer group z-10"
-            >
-              <div className="relative h-32 w-full border border-ink halftone overflow-hidden">
-                <Image
-                  src={ARTISTS[3].image}
-                  alt={ARTISTS[3].name}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 300px"
-                  className="object-cover grayscale contrast-125 group-hover:grayscale-0 transition-all duration-300"
-                />
-              </div>
-              <div className="mt-1.5 flex items-center justify-between">
-                <h3 className="font-headline text-base text-ink truncate">{ARTISTS[3].name}</h3>
-                <span className="font-mono text-[9px] bg-primary text-white px-1.5 py-0.5 border border-ink shrink-0">
-                  REVIVAL
-                </span>
-              </div>
-              <div className="absolute -bottom-2 -right-2 washi-tape-ember rotate-[-12deg]" />
-            </div>
-
-            {/* 5. Bottom-Left Card: Judikay */}
-            <div
-              onClick={() => setSelectedArtist(ARTISTS[4])}
-              className="hidden lg:block absolute -bottom-4 left-2 xl:left-[9rem] w-52 xl:w-56 bg-paper p-2.5 border-2 border-ink neo-shadow rotate-[4deg] transition-all duration-300 hover:rotate-0 hover:scale-105 hover:z-30 cursor-pointer group z-10"
-            >
-              <div className="relative h-32 w-full border border-ink halftone overflow-hidden">
-                <Image
-                  src={ARTISTS[4].image}
-                  alt={ARTISTS[4].name}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 300px"
-                  className="object-cover grayscale contrast-125 group-hover:grayscale-0 transition-all duration-300"
-                />
-              </div>
-              <div className="mt-1.5 flex items-center justify-between">
-                <h3 className="font-headline text-base text-ink truncate">{ARTISTS[4].name}</h3>
-                <span className="font-mono text-[9px] bg-tertiary-gold text-ink px-1.5 py-0.5 border border-ink shrink-0">
-                  WORSHIP
-                </span>
-              </div>
-              <div className="absolute -bottom-2 -left-2 washi-tape-gold rotate-[6deg]" />
-            </div>
-
-            {/* 6. Bottom-Right Card: CalledOut Music */}
-            <div
-              onClick={() => setSelectedArtist(ARTISTS[5])}
-              className="hidden lg:block absolute -bottom-4 right-2 xl:right-[9rem] w-52 xl:w-56 bg-paper p-2.5 border-2 border-ink neo-shadow rotate-[-5deg] transition-all duration-300 hover:rotate-0 hover:scale-105 hover:z-30 cursor-pointer group z-10"
-            >
-              <div className="relative h-32 w-full border border-ink halftone overflow-hidden">
-                <Image
-                  src={ARTISTS[5].image}
-                  alt={ARTISTS[5].name}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 300px"
-                  className="object-cover grayscale contrast-125 group-hover:grayscale-0 transition-all duration-300"
-                />
-              </div>
-              <div className="mt-1.5 flex items-center justify-between">
-                <h3 className="font-headline text-base text-ink truncate">{ARTISTS[5].name}</h3>
-                <span className="font-mono text-[9px] bg-secondary text-white px-1.5 py-0.5 border border-ink shrink-0">
-                  AFROGOSPEL
-                </span>
-              </div>
-              <div className="absolute -bottom-2 -right-2 washi-tape-ember rotate-[-8deg]" />
-            </div>
-
-            {/* CENTERED HERO CONTENT (Framed by the 6 surrounding circular cards) */}
-            <div className="relative z-20 max-w-xl xl:max-w-2xl mx-auto text-center flex flex-col items-center gap-6 my-auto">
+            {/* CENTERED HERO CONTENT (Framed by surrounding circular cards) */}
+            <div className="relative z-20 max-w-lg xl:max-w-xl mx-auto text-center flex flex-col items-center gap-5 my-auto pt-6">
 
               {/* Date & Location Stamp */}
               <div className="flex flex-wrap items-center justify-center gap-3">
-                <span className="bg-secondary text-white font-mono text-sm font-bold px-3.5 py-1.5 border-2 border-ink neo-shadow-sm rotate-[-2deg] flex items-center gap-2">
-                  <img src="/images/JUDAH-PNG.png" alt="JUDAH FEST" className="w-5 h-5 object-contain inline-block" /> SATURDAY, OCT 3, 2026 • 4:00 PM - 9:30 PM
+                <span className="bg-secondary text-white font-mono text-xs font-bold px-3 py-1 border-2 border-ink neo-shadow-sm rotate-[-2deg] flex items-center gap-2">
+                  <img src="/images/JUDAH-PNG.png" alt="JUDAH FEST" className="w-4 h-4 object-contain inline-block" /> SATURDAY, OCT 3, 2026 • 4:00 PM - 9:30 PM
                 </span>
-                <span className="bg-paper text-ink font-mono text-sm font-bold px-3.5 py-1.5 border-2 border-ink neo-shadow-sm flex items-center gap-1.5">
-                  <MapPin className="w-4 h-4 text-primary" /> CHURCH AT THE SOUTH STAR, BERLIN, BE
+                <span className="bg-paper text-ink font-mono text-xs font-bold px-3 py-1 border-2 border-ink neo-shadow-sm flex items-center gap-1.5">
+                  <MapPin className="w-3.5 h-3.5 text-primary" /> CHURCH AT THE SOUTH STAR, BERLIN, BE
                 </span>
               </div>
 
-              {/* Main Headline */}
-              <div className="space-y-2">
-                <span className="font-annotation text-secondary text-xl md:text-2xl block rotate-[-1.5deg]">
+              {/* Main Headline (20% smaller font size) */}
+              <div className="space-y-1.5">
+                <span className="font-annotation text-secondary text-lg md:text-xl block rotate-[-1.5deg]">
                   The Annual Sacred Gathering
                 </span>
-                <h1 className="font-headline text-4xl sm:text-5xl md:text-6xl xl:text-7xl text-ink leading-none tracking-tight">
+                <h1 className="font-headline text-3xl sm:text-4xl md:text-5xl xl:text-6xl text-ink leading-none tracking-tight">
                   JUDAH FESTIVAL <br />
-                  <span className="text-primary underline decoration-tertiary-gold decoration-wavy underline-offset-8">
+                  <span className="text-primary underline decoration-tertiary-gold decoration-wavy underline-offset-6">
                     2026 BERLIN
                   </span>
                 </h1>
@@ -443,8 +338,8 @@ export default function HomePage() {
               </Link>
             </div>
 
-            {/* Lineup Cards Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Lineup Cards Grid with Ample Spacing */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
               {ARTISTS.map((artist, idx) => (
                 <div
                   key={artist.id}
@@ -457,8 +352,8 @@ export default function HomePage() {
                       src={artist.image}
                       alt={artist.name}
                       fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                      className="object-cover grayscale contrast-125 group-hover:grayscale-0 transition-all duration-300"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover object-top transition-all duration-300 group-hover:scale-105"
                     />
                     <div className="absolute top-2 left-2 bg-ink text-paper font-mono text-xs font-bold px-2 py-0.5 border border-paper">
                       {artist.genre}
@@ -488,7 +383,12 @@ export default function HomePage() {
         </section>
 
         {/* MARQUEE STRIP 2 (Gold Accent) */}
-        <Marquee text="VIP YAHWEH PASSES • GENERAL PRAISE • FAMILY BUNDLES • SECURE YOUR STUB" variant="gold" />
+        <Marquee
+          text="EARLY BIRD (22,49 €) • STANDARD STANDING (35,27 €) • GALLERY SEATING (43,80 €) • GROUP TICKET FOR 3 (54,45 €) • YOUTH TICKET (13,96 €) • PARKING PASS (8,64 €)"
+          variant="gold"
+          speed="slow"
+          duration={100}
+        />
 
         {/* SECTION 4: Perforated Ticket Tier Selection */}
         <section className="py-20 px-6 md:px-12 bg-paper border-b-4 border-ink">

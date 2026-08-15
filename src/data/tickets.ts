@@ -19,52 +19,99 @@ export interface TicketTier {
 
 export const TICKET_TIERS: TicketTier[] = [
   {
-    id: "general-praise",
-    name: "GENERAL PRAISE PASS",
-    badge: "STANDARD ENTRY",
-    serialPrefix: "№ 001-GP",
-    priceUSD: 25,
-    priceLocal: "$25 / ₵350",
-    period: "FULL 3-DAY ACCESS",
-    perks: [
-      "Access to all 3 main stages",
-      "Free festival cloth souvenir badge",
-      "Access to Food & Artisan Marketplace",
-      "Standard entry gates"
-    ],
-    color: "kelly"
-  },
-  {
-    id: "vip-yahweh-pass",
-    name: "VIP YAHWEH PASS",
-    badge: "MOST POPULAR",
-    serialPrefix: "№ 002-YP",
-    priceUSD: 65,
-    priceLocal: "$65 / ₵900",
-    period: "PREMIUM EXPERIENCE",
+    id: "early-bird",
+    name: "EARLY BIRD (STANDING)",
+    badge: "LIMITED AVAILABILITY",
+    serialPrefix: "№ 001-EB",
+    priceUSD: 22.49,
+    priceLocal: "22,49 € (incl. fees)",
+    period: "OCTOBER 3, 2026",
     popular: true,
     perks: [
-      "Front-stage priority worship zone",
-      "Express fast-track entry gates",
-      "Exclusive VIP paper-print souvenir poster & washi tape kit",
-      "Access to air-conditioned VIP lounge & light refreshments",
-      "Official Judah Fest 2026 T-Shirt"
+      "Access to full festival experience (4:00 PM - 9:30 PM)",
+      "Standard standing arena entrance",
+      "Access to food & artisan marketplace",
+      "Sales end Oct 3, 2026"
     ],
     color: "gold"
   },
   {
-    id: "family-group-bundle",
-    name: "FAMILY & FELLOWSHIP BUNDLE",
-    badge: "GROUP SAVINGS (5 PASSES)",
-    serialPrefix: "№ 003-FB",
-    priceUSD: 100,
-    priceLocal: "$100 / ₵1,400",
-    period: "5 PASSES INCLUDED",
+    id: "standard-standing",
+    name: "STANDARD STANDING TICKET",
+    badge: "STANDARD ENTRY",
+    serialPrefix: "№ 002-ST",
+    priceUSD: 35.27,
+    priceLocal: "35,27 € (incl. fees)",
+    period: "OCTOBER 3, 2026",
     perks: [
-      "5 Full 3-Day Passes for family/church group",
-      "Dedicated group seating block in main arena",
-      "Group prayer blessing session with minister collective",
-      "Complimentary festival parking pass"
+      "Standard standing ticket admits one person",
+      "Full access to main arena worship experience",
+      "Access to food & artisan marketplace",
+      "Sales end Oct 3, 2026"
+    ],
+    color: "kelly"
+  },
+  {
+    id: "gallery-seating",
+    name: "GALLERY SEATING",
+    badge: "SEATED TICKET",
+    serialPrefix: "№ 003-GS",
+    priceUSD: 43.80,
+    priceLocal: "43,80 € (incl. fees)",
+    period: "OCTOBER 3, 2026",
+    perks: [
+      "Standard seating ticket in the gallery",
+      "Admits one person with elevated arena view",
+      "Access to food & artisan marketplace",
+      "Sales end Oct 3, 2026"
+    ],
+    color: "ember"
+  },
+  {
+    id: "group-ticket-3",
+    name: "GROUP TICKET FOR 3",
+    badge: "GROUP BUNDLE",
+    serialPrefix: "№ 004-GT3",
+    priceUSD: 54.45,
+    priceLocal: "54,45 € (incl. fees)",
+    period: "OCTOBER 3, 2026",
+    perks: [
+      "Group standing ticket that admits 3 persons",
+      "Save together as a group or ministry team",
+      "Access to food & artisan marketplace",
+      "Sales end Oct 3, 2026"
+    ],
+    color: "kelly"
+  },
+  {
+    id: "youth-ticket",
+    name: "YOUTH TICKET (12-18)",
+    badge: "YOUTH DISCOUNT",
+    serialPrefix: "№ 005-YT",
+    priceUSD: 13.96,
+    priceLocal: "13,96 € (incl. fees)",
+    period: "OCTOBER 3, 2026",
+    perks: [
+      "For teenagers or high school students (ages 12-18)",
+      "ID & age checks performed at the door",
+      "Full access to festival grounds and worship stages",
+      "Sales end Oct 3, 2026"
+    ],
+    color: "gold"
+  },
+  {
+    id: "parking",
+    name: "PARKING PASS (ZUSATZARTIKEL)",
+    badge: "ADD-ON",
+    serialPrefix: "№ 006-PKG",
+    priceUSD: 8.64,
+    priceLocal: "8,64 € (incl. fees)",
+    period: "OCTOBER 3, 2026",
+    perks: [
+      "Park directly at the car park of the event",
+      "Guaranteed vehicle parking spot for event duration",
+      "Easy access to entrance gates",
+      "Sales end Oct 3, 2026"
     ],
     color: "ember"
   }
