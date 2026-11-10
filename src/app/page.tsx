@@ -143,9 +143,6 @@ export default function HomePage() {
 
               {/* Main Headline (20% smaller font size) */}
               <div className="space-y-1.5">
-                <span className="font-annotation text-secondary text-lg md:text-xl block rotate-[-1.5deg]">
-                  The Annual Sacred Gathering
-                </span>
                 <h1 className="font-headline text-3xl sm:text-4xl md:text-5xl xl:text-6xl text-ink leading-none tracking-tight">
                   JUDAH FESTIVAL <br />
                   <span className="text-primary underline decoration-tertiary-gold decoration-wavy underline-offset-6">
@@ -264,7 +261,7 @@ export default function HomePage() {
                 Judah Festival isn’t a polished corporate concert—it is a grassroots altar where believers assemble to exalt Yahweh without constraint. Emulating the tactile spirit of screen-printed flyers, our gathering prioritizes character, passion, and spiritual intimacy.
               </p>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
+              {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
                 <div className="p-4 bg-surface-container border-2 border-ink neo-shadow-sm">
                   <div className="font-headline text-2xl text-primary flex items-center gap-2">
                     <Flame className="w-6 h-6 text-secondary" /> 3 MAIN STAGES
@@ -282,7 +279,7 @@ export default function HomePage() {
                     Over 500 voices singing in unity across night vigils and day sessions.
                   </p>
                 </div>
-              </div>
+              </div> */}
             </div>
 
             {/* Right Column: Interactive Poster Banner Card */}
@@ -424,7 +421,7 @@ export default function HomePage() {
         {/* SECTION 4.5: ANTIDOTE DONATION & SEED ALTAR */}
         <section className="py-20 px-6 md:px-12 bg-surface-container border-b-4 border-ink relative overflow-hidden">
           <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12">
-            
+
             {/* Left Column: Visual Callout Box */}
             <div className="w-full lg:w-1/2 bg-paper p-8 md:p-10 border-4 border-ink neo-shadow-lg relative rotate-[-1deg]">
               <div className="absolute -top-4 left-6 washi-tape-gold rotate-[-6deg]" />
